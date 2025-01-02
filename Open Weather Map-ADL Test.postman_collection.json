@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "e6cb130b-f8f3-4bd1-a10d-2714ffdad5e9",
+		"name": "Open Weather Map-ADL Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34912047"
+	},
+	"item": [
+		{
+			"name": "ADL Test",
+			"item": [
+				{
+					"name": "Forecast Jakarta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if the city is Jakarta\", function () {\r",
+									"    pm.expect(pm.response.json().city.name).to.equal(\"Jakarta\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if weather data is available\", function () {\r",
+									"    pm.expect(pm.response.json().list).to.be.an('array').that.is.not.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if there are 5 data\", function () {\r",
+									"    pm.expect(pm.response.json().list).to.have.lengthOf(5);\r",
+									"});\r",
+									"pm.test(\"Check if weather data is available in the list\", function () {\r",
+									"    pm.expect(pm.response.json().list.every(item => item.hasOwnProperty('weather'))).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Check if summary is available\", function () {\r",
+									"    pm.expect(pm.response.json().list.every(item => item.hasOwnProperty('main'))).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Check if date is available\", function () {\r",
+									"    pm.expect(pm.response.json().list.every(item => item.hasOwnProperty('dt_txt'))).to.be.true;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "cookie",
+								"value": "ar_debug=1; IDE=AHWqTUn7ndXJH7RGmlUWOvHQDelukc7ysijStEEQJgA_WeVrPeHi-UrDhbnONXUs"
+							},
+							{
+								"key": "dnt",
+								"value": "1"
+							},
+							{
+								"key": "priority",
+								"value": "u=0, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://openweathermap.org/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "iframe"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "navigate"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "upgrade-insecure-requests",
+								"value": "1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "x-browser-channel",
+								"value": "stable"
+							},
+							{
+								"key": "x-browser-copyright",
+								"value": "Copyright 2024 Google LLC. All rights reserved."
+							},
+							{
+								"key": "x-browser-validation",
+								"value": "QFEz3B6Z4AT6PlLzuts1mBxQGCM="
+							},
+							{
+								"key": "x-browser-year",
+								"value": "2024"
+							},
+							{
+								"key": "x-client-data",
+								"value": "CIq2yQEIorbJAQipncoBCJGFywEIlqHLAQiJo8sBCIWgzQEI4tDOARj0yc0B"
+							}
+						],
+						"url": {
+							"raw": "https://api.openweathermap.org/data/2.5/forecast?id={{cityID}}&cnt=5&appid={{API_Keys}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"openweathermap",
+								"org"
+							],
+							"path": [
+								"data",
+								"2.5",
+								"forecast"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{cityID}}"
+								},
+								{
+									"key": "cnt",
+									"value": "5"
+								},
+								{
+									"key": "appid",
+									"value": "{{API_Keys}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Air Polution",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response Time is below 3s\", function () {\r",
+									"     pm.expect(pm.response.responseTime).to.be.below(3000, \"Response time should be below 3s\");\r",
+									"});\r",
+									"pm.test(\"Location is correct\", function () {\r",
+									"    pm.expect(pm.response.json().coord).to.eql({\"lon\": 106.8346, \"lat\": -6.233});\r",
+									"});\r",
+									"pm.test(\"AQI data is available\", function () {\r",
+									"    pm.expect(pm.response.json().list[0].main).to.have.property(\"aqi\");\r",
+									"});\r",
+									"pm.test(\"Components are available\", function () {\r",
+									"    pm.expect(pm.response.json().list[0].components).to.be.an('object').and.to.not.be.empty;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Url}}/data/2.5/air_pollution?lat={{lat}}&lon={{lon}}&appid={{API_Keys}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"data",
+								"2.5",
+								"air_pollution"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "{{lat}}"
+								},
+								{
+									"key": "lon",
+									"value": "{{lon}}"
+								},
+								{
+									"key": "appid",
+									"value": "{{API_Keys}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_Keys",
+			"value": "da2160e8dd1d89ea505ca4fa1481d5ed",
+			"type": "string"
+		},
+		{
+			"key": "lat",
+			"value": "-6.232970",
+			"type": "string"
+		},
+		{
+			"key": "lon",
+			"value": "106.834572",
+			"type": "string"
+		},
+		{
+			"key": "csrfToken",
+			"value": "Mh6aomMzPeZO17NS0IvJZGPT0AHvWr0qmo9vPEZ0jbgc+6HPMRq8FBTTFBb8vZYQz5QnpuCLdbYHmZVIN3feNQ==",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://api.openweathermap.org",
+			"type": "default",
+			"disabled": true
+		},
+		{
+			"key": "Url",
+			"value": "https://api.openweathermap.org",
+			"type": "default"
+		},
+		{
+			"key": "cityID",
+			"value": "1642911",
+			"type": "string"
+		}
+	]
+}
