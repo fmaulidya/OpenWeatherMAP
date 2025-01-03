@@ -162,7 +162,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.openweathermap.org/data/2.5/forecast?id={{cityID}}&cnt=5&appid={{API_Keys}}",
+							"raw": "https://api.openweathermap.org/data/2.5/forecast?id={{cityID}}&appid={{API_Keys}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -178,10 +178,6 @@
 								{
 									"key": "id",
 									"value": "{{cityID}}"
-								},
-								{
-									"key": "cnt",
-									"value": "5"
 								},
 								{
 									"key": "appid",
